@@ -13,8 +13,8 @@ var serveIndex = require('serve-index');
 var argv = require('minimist')(process.argv.slice(2));
 var app = express();
 
-var default_host = ip.address();
-var default_port = argv.p || argv.port || 8090;
+var default_host = "0.0.0.0";
+var default_port = argv.p || argv.port || 5000;
 var default_folder = argv.f || argv.folder || 'files';
 var version = argv.v || argv.version;
 var tls_enabled = argv.S || argv.tls;
@@ -83,7 +83,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-  res.send(html.template);
+  res.send(html.template.replace("%default_folder%", default_folder));
 });
 
 app.post('/', upload.any(), function(req, res) {
