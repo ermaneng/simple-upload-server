@@ -28,7 +28,7 @@ function _usage() {
     '', 'usage: upload-server [options]',
     '',
     'options:',
-    '  -p --port    Port number (default: 8090)',
+    '  -p --port    Port number (default: 5000)',
     '  -f --folder  Folder to upload files (default: files)',
     '  -S --tls     Enable TLS / HTTPS',
     '  -C --cert    Server certificate file',
