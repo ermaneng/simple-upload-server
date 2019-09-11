@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 var fs = require('fs');
-var ip = require('ip');
-var path = require('path');
 var http = require('http');
 var https = require('https');
 var express = require('express');
