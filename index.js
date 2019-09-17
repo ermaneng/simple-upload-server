@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const os = require('os');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
@@ -11,6 +12,7 @@ var serveIndex = require('serve-index');
 var argv = require('minimist')(process.argv.slice(2));
 var app = express();
 
+var ifaces = os.networkInterfaces();
 var default_host = "0.0.0.0";
 var default_port = argv.p || argv.port || 5000;
 var default_folder = argv.f || argv.folder || 'files';
@@ -103,6 +105,17 @@ if(tls_enabled && cert_file && key_file) {
 }
 else {
   http.createServer(app).listen(default_port, default_host, function() {
-    console.log('[' + new Date().toISOString() + '] - Server started on http://' + default_host + ':' + default_port);
+    console.log('[' + new Date().toISOString() + '] - Server started on:');
+    // console.log(`Available on:`)
+    Object.keys(ifaces).forEach(i => {
+      const iface = ifaces[i]
+      iface.map(detail => {
+        const { family, address } = detail
+        if (family === 'IPv4') {
+          console.log(`\thttp://${address}:${default_port}`)
+        }
+      })
+    })
+    console.log('Hit CTRL-C to stop the server')
   });
 }
