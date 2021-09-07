@@ -5,12 +5,14 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 var express = require('express');
+var cors = require('cors');
 var multer = require('multer');
 var html = require('./tpl');
 var pkg = require('./package.json');
 var serveIndex = require('serve-index');
 var argv = require('minimist')(process.argv.slice(2));
 var app = express();
+app.use(cors());
 
 var ifaces = os.networkInterfaces();
 var default_host = "0.0.0.0";
